@@ -1,4 +1,4 @@
-FROM node:11-alpine
+FROM node:12-alpine
 
 # Clean!
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -15,4 +15,5 @@ RUN cp -a /tmp/node_modules $APP_ROOT
 
 ADD . $APP_ROOT
 
-CMD ["yarn", "run", "start-dev"]
+EXPOSE 3000
+CMD ["yarn", "start"]
