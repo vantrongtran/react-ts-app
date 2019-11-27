@@ -5,16 +5,17 @@ import history from './utils/history';
 import { ThemeProvider } from 'styled-components';
 import Helmet from 'react-helmet';
 
+import 'semantic-ui-css/semantic.min.css';
+
 import ErrorBoundary from './components/ErrorBoundary';
-import store from './store/configureStore';
+import store from './configureStore';
 import theme from './utils/theme';
 import MainLayout from './layouts/MainLayout';
 import PublicRoute from './components/PublicRoute';
 import * as Page from './pages/index';
-// import Login from './pages/Login';
 
 const App = () => (
-  <Provider store={store}>
+  <Provider store={store as any}>
     <Router history={history}>
       <ThemeProvider theme={theme}>
         <React.Fragment>
@@ -24,17 +25,13 @@ const App = () => (
           </Helmet>
           <ErrorBoundary>
             <MainLayout>
-              <PublicRoute
-                path="/"
-                isAuthenticated={false}
-                component={Page.Login}
-              />
+              <PublicRoute isAuthenticated={false} path="/login" component={Page.Login} />
             </MainLayout>
           </ErrorBoundary>
         </React.Fragment>
       </ThemeProvider>
     </Router>
   </Provider>
-)
+);
 
 export default App;

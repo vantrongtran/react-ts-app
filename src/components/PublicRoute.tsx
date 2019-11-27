@@ -1,22 +1,17 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import {RouteProps} from '../types/routeProps';
+import { RouteProps } from './types';
 
 const PublicRoute = ({
   component: Component,
   isAuthenticated,
-  to,
-  layout: Layout,
+  path,
   ...rest
 }: RouteProps) => (
     <Route
       {...rest}
       render={props =>
-        isAuthenticated ? (<Redirect to={to || '/'} />) : (
-          <Layout>
-            <Component {...props} />
-          </Layout>
-        )
+        isAuthenticated ? <Redirect to={path || '/'} /> : <Component {...props} />
       }
     />
   );

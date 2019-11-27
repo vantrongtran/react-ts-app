@@ -1,9 +1,8 @@
 import React from 'react';
+import LoginView from './view/LoginView'
 
 const Login = () => {
-  return (
-    <div>Login</div>
-  )
+  return <LoginView />;
 }
 
 export default Login;

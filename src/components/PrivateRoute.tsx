@@ -1,33 +1,19 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import {RouteProps} from '../types/routeProps';
+import { RouteProps } from './types';
 
-const PrivateRoute = ({
+const PublicRoute = ({
   component: Component,
   isAuthenticated,
-  to,
-  layout: Layout,
+  path,
   ...rest
- }: RouteProps) => (
-  <Route
-    {...rest}
-    render={props =>
-      isAuthenticated ? (
-        <Layout>
-          <Component {...props} />
-        </Layout>
-      ) : (
-        <Redirect to={{
-          pathname: to,
-          state: {redirect: props.location.pathname, isAuthenticated}
-        }}/>
-      )
-    }
-  />
-);
+}: RouteProps) => (
+    <Route
+      {...rest}
+      render={props =>
+        isAuthenticated ? <Component {...props} /> : < Redirect to={{pathname: '/login', state: { from: props.location }}}/>
+      }
+    />
+  );
 
-PrivateRoute.defaultProps = {
-  to: '/',
-}
-
-export default PrivateRoute;
+export default PublicRoute;
